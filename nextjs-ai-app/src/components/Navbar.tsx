@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Navbar() => {
+export default function navbar()=> {
     return (
         <nav className="bg-gray-800 p-4 flex items-center justify-between">
             <h1 className="text-white font-hold text-lg">AI App 🤖</h1>
