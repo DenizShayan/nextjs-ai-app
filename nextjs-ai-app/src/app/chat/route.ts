@@ -19,7 +19,7 @@ export async function POST(req: Request) {
 
             reply = "Hi there! I'm a mock AI - how can I help you today?";
 
-            else if (user.length < 20) reply - `You said: "${user}". Tell me more!`;
+            else if (user.length < 20) reply = `You said: "${user}". Tell me more!`;
 
         return NextResponse.json({ reply });
 
