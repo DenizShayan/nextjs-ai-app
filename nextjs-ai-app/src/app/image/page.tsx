@@ -1,6 +1,6 @@
 "use client";
 
-import React,{ useState,FormEvent } from "react";
+import React, { useState, FormEvent } from "react";
 
 type ImageResponse = {
     imageUrl: string;
@@ -8,10 +8,10 @@ type ImageResponse = {
 };
 
 export default function ImagePage() {
-    const [prompt,setPrompt]=useState("");
-    const [image, setImage]=useState<ImageResponse |null>(null);
+    const [prompt, setPrompt] = useState("");
+    const [image, setImage] = useState<ImageResponse | null>(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError]= useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -51,7 +51,7 @@ export default function ImagePage() {
                     </h1>
                     <span className="text-xs text-slate-400">
                         Next.js • App Router • API Routes
-                       </span>
+                    </span>
                 </header>
 
                 <form onSubmit={handleSubmit} className="p-4 space-y-3 border-b border-slate-700">
@@ -75,24 +75,38 @@ export default function ImagePage() {
                         <p className="text-xs text-red-400 mt-1">
                             {error}
                         </p>
-            )
-        }
-        </form>
-
-        <div className="p-4 flex-1 flex-col item-center justify-center">
-            {!image && !isLoading && !error && (
-              <p className="text-sm text-slate-400 text-center">  
-                submit a prompt to generate a random mock image  
-                Later we can connect this to a real AI image API.
-              </p>
-            )}
-
-            {isLoading && (
-                <p className="text-sm text-slate-300">AI is generating an image...</p>
-            )}
-
-            {image && (
-                <div className="w-full flex flex-col items-center">
-                    
+                    )
                     }
+                </form>
+
+                <div className="p-4 flex-1 flex-col item-center justify-center">
+                    {!image && !isLoading && !error && (
+                        <p className="text-sm text-slate-400 text-center">
+                            submit a prompt to generate a random mock image
+                            Later we can connect this to a real AI image API.
+                        </p>
+                    )}
+
+                    {isLoading && (
+                        <p className="text-sm text-slate-300">AI is generating an image...</p>
+                    )}
+
+                    {image && (
+                        <div className="w-full flex flex-col items-center gap-3">
+                            {image.usedPrompt && (
+                                <p className="text-xs text-slate-400 text-center">
+                                    promt: <span className="text-slate-200">{image.usedPrompt}</span>
+                                </p>
+                            )}
+                            <img
+                                src={image.imageUrl}
+                                alt={image.usedPrompt || "Generated Image"}
+                                className="max-h-[400px] rounded-xl border border-slate-700 object-cover"
+                            />
+                        </div>
+                    )}
+                </div>
+            </div>
+        </main>
+    );
 }
